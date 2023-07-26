@@ -5,3 +5,6 @@ def printa()
 
 def printa2()
   print("Neymar Gay")
+
+def fakeAmor()
+  print("Fiz um fake amor")
