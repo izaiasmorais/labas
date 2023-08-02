@@ -1,5 +1,5 @@
 <h1 align='center'>
-    Projeto Final
+    Laboratório de programação | Projeto Final
 </h1>
 
 <p align="center">Projeto Python para aplicar filtros em imagens (.jpg ou .png) locais ou públicas com paradigma Orientado a Objetos e interface interativa.</p>
