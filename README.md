@@ -10,7 +10,5 @@ Apresentamos um projeto em Python que permite ao usuário aplicar diversos filtr
 
 ### Funcionalidades
 
-- [ ] Realizar download de imagens inseridas pelo usuário
+- [x] Realizar download de imagens inseridas pelo usuário
 - [ ] Aplicar diferentes filtros na imagem
-
-url utilizada: https://i.imgur.com/4JfFzfh.png
