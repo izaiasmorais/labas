@@ -1,0 +1,3 @@
+# [] EdgesFilter
+# [] GrayscaleFilter
+# [] BlackAndWhiteFilter

@@ -2,7 +2,7 @@ import requests
 from PIL import Image
 
 
-class Manipulador:
+class Download:
 
     def __init__(self, url):
         self.url = url
@@ -21,10 +21,3 @@ class Manipulador:
 
     def mostrar_imagem(self):
         Image.open("imagem.jpg").show()
-
-
-manipulador = Manipulador("https://i.imgur.com/4JfFzfh.png")
-
-manipulador.baixar_imagem()
-
-manipulador.mostrar_imagem()
