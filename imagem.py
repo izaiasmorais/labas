@@ -6,9 +6,13 @@ class Imagem:
         self.caminho = caminho
         self.imagem = None
         try:
-            image.open(self.caminho)
+            self.imagem = Image.open(self.caminho)
+            print(f"Imagem: {self.nome} criada com sucesso")
         except Exception as e:
             print("Erro ao criar a imagem")
 
     def mostrar_imagem(self):
-        Image.open(self.camimho).show()
+        try:
+          self.imagem.show()
+        except AttributeError:
+          print("Imagem não encontrada ou não pode ser exibida.")

@@ -13,7 +13,7 @@ class Download:
             response.raise_for_status()
             with open(self.caminho_do_arquivo, 'wb') as file:
                 file.write(response.content)
-                print(f'Imagem salva com sucesso em URL: {self.caminho_do_arquivo}')
+                print(f'Download realizado com sucesso, salvo em: {self.caminho_do_arquivo}')
         except requests.exceptions.MissingSchema:
             print("URL inválida.")
         except requests.exceptions.RequestException as e:
