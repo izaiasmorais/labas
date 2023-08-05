@@ -12,5 +12,3 @@ class Imagem:
 
     def mostrar_imagem(self):
         Image.open(self.camimho).show()
-
-    

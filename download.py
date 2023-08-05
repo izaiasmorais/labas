@@ -11,7 +11,7 @@ class Download:
         try:
             response = requests.get(self.url)
             response.raise_for_status()
-            with open(caminho_do_arquivo, 'wb') as file:
+            with open(self.caminho_do_arquivo, 'wb') as file:
                 file.write(response.content)
                 print(f'Imagem salva com sucesso em URL: {self.caminho_do_arquivo}')
         except requests.exceptions.MissingSchema:
