@@ -1,5 +1,4 @@
 import requests
-from PIL import Image
 
 class Download:
 
@@ -18,6 +17,3 @@ class Download:
             print("URL inválida.")
         except requests.exceptions.RequestException as e:
             print(f"Erro na conexão: {e}")
-
-    def mostrar_imagem(self):
-        Image.open("imagem.jpg").show()
