@@ -13,4 +13,6 @@ Apresentamos um projeto em Python que permite ao usuário aplicar diversos filtr
 - [x] Realizar download de imagens inseridas pelo usuário
 - [x] Criar imagens a partir do download realizado
 - [x] Listar imagens
+- [ ] Criar entidade filtro
 - [ ] Aplicar diferentes filtros na imagem
+- [ ] Criar classe principal
