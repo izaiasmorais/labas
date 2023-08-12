@@ -7,7 +7,7 @@ class Biblioteca:
 
     def remover_imagem(self, imagem):
         self.lista_de_imagens.remove(imagem)
-    
+
     def listar_imagens(self):
         for imagem in self.lista_de_imagens:
             print(imagem.nome)
@@ -17,7 +17,7 @@ class Biblioteca:
             if imagem.nome == nome:
                 return imagem
         return None
-    
+
     def mostrar_imagem(self, nome):
         imagem = self.buscar_imagem(nome)
         if imagem != None:
