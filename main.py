@@ -61,14 +61,19 @@ class main:
 
         #baixa imagem se for da net
         md = Download( url_or_caminho= url, caminho= nome_final)
-        md.baixar_imagem()
+        resposta = md.baixar_imagem()
         img = Imagem(id = len(self.biblioteca.lista_de_imagens), nome = nome_final,caminho = nome_final, extensao = extensao)
         #adiciona a imagem na biblioteca
-        self.biblioteca.adicionar_imagem(img)
+        if resposta is True:
+            self.biblioteca.adicionar_imagem(img)
     
     def aplicar_filtro(self):
         self.limpar_terminal()
         #lista as imagens
+        if len(self.biblioteca.lista_de_imagens) == 0:
+            print("Não é possível aplicar filtro!")
+            print("Não há imagens na biblioteca.")
+            return
         print("\nEscolha a imagem que deseja aplicar o filtro:")
         self.biblioteca.listar_imagens()
 
@@ -111,6 +116,10 @@ class main:
                 print("Opção inválida")
 
     def listar_arquivos(self):
+        if len(self.biblioteca.lista_de_imagens) == 0:
+            print("Não foi possível listar as imagens!")
+            print("Não há imagens na biblioteca.")
+            return
         print("Lista de imagens:")
         self.biblioteca.listar_imagens()
         self.exibir_menu()

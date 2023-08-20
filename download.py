@@ -15,15 +15,20 @@ class Download:
                 response.raise_for_status()
                 with open(self.caminho_do_arquivo, "wb") as file:
                     file.write(response.content)
+                return True
             else:
                 # Se a URL for um caminho local, copia o arquivo para o caminho de destino
                 shutil.copy(self.url_or_caminho, self.caminho_do_arquivo)
             print(
                 f"Download realizado com sucesso, salvo em: {self.caminho_do_arquivo}"
             )
+            return True
         except requests.exceptions.MissingSchema:
             print("URL inválida.")
+            return False
         except requests.exceptions.RequestException as e:
             print(f"Erro na conexão: {e}")
+            return False
         except FileNotFoundError:
             print(f"Arquivo não encontrado: {self.url_or_caminho}")
+            return False
