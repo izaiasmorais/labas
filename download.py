@@ -29,3 +29,6 @@ class Download:
         except FileNotFoundError:
             print(f"Arquivo não encontrado: {self.url_or_caminho}")
             return False
+        except Exception as e:
+            print(f"Erro ao baixar a imagem: {e}")
+            return False
