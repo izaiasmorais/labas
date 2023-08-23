@@ -16,15 +16,10 @@ class Biblioteca:
                 self.remover_arquivo(imagem_lib.nome)
                 self.lista_imagens.remove(imagem_lib)
 
-    def remover_arquivo(self, nome_arquivo):
-        try:
-            os.remove(nome_arquivo)
-        except OSError as e:
-            print(f"Erro ao remover o arquivo {nome_arquivo}: {e}")
-
     def listar_imagens(self):
         for imagem in self.lista_imagens:
-            print(str(imagem.id+1) + ' - ' +imagem.nome) 
+            print(str(imagem.id+1) + ' - ' +imagem.nome)
+        print("0 - Voltar ao menu") 
 
     def buscar_imagem(self, nome):
         for imagem in self.lista_imagens:
@@ -47,3 +42,31 @@ class Biblioteca:
     def limpa_sistema(self):
         for imagem in self.lista_imagens:
             self.remover_arquivo(imagem.nome)
+
+    def remover_imagens_por_tipo(self, tipo):
+        imagens_removidas = []
+        for imagem in self.lista_imagens:
+            if tipo == "Filtro":
+                if "_Filtro_" in imagem.nome:
+                    imagens_removidas.append(imagem)
+            elif tipo == "URL":
+                if "_Filtro_" not in imagem.nome:
+                    imagens_removidas.append(imagem)
+
+        for imagem in imagens_removidas:
+            self.remover_arquivo(imagem.nome)
+            self.lista_imagens.remove(imagem)
+        print(f"Removidas {len(imagens_removidas)} imagens")
+
+    def remover_todas_imagens(self):
+        for imagem in self.lista_imagens:
+            self.remover_arquivo(imagem.nome)
+        self.lista_imagens = []
+        print("Todas as imagens foram removidas.")
+
+    def remover_arquivo(self, nome_arquivo):
+        try:
+            os.remove(nome_arquivo)
+            print(f"Arquivo {nome_arquivo} removido com sucesso.")
+        except OSError as e:
+            print(f"Erro ao remover o arquivo {nome_arquivo}: {e}")

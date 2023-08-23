@@ -17,15 +17,20 @@ class main:
         
     def adiciona_imagem_existente(self):
         arquivos = os.listdir(os.getcwd())
-        imagens = [arquivo for arquivo in arquivos if arquivo.lower().endswith(('.jpg','.png'))]
+        imagens = [arquivo for arquivo in arquivos if arquivo.lower().endswith(('.jpg', '.jpeg', '.png', '.gif'))]
         for imagem in imagens:
-            img = Imagem(id = len(self.biblioteca.lista_imagens), nome = imagem,caminho = imagem, extensao = os.path.splitext(imagem)[1])
+            img = Imagem(id=len(self.biblioteca.lista_imagens), nome=imagem, caminho=imagem, extensao=os.path.splitext(imagem)[1])
             self.biblioteca.adicionar_imagem(img)
             self.limpar_terminal()
 
     def exibir_menu(self):
         while True:
-            print("\n1. Informar a url da imagem\n2. Aplicar filtro na imagem\n3. Listar os arquivos de imagens\n4. Remover imagem(s)\n0. Sair")
+            print("\n1. Informar a URL da imagem")
+            print("2. Aplicar filtro na imagem")
+            print("3. Listar os arquivos de imagens")
+            print("4. Remover imagem(s)")
+            print("5. Remover conjunto de imagens")
+            print("0. Sair")
             opcao = input('Digite a opção desejada: ')
             if opcao == "1":
                 url = input("Digite a url da imagem: ")
@@ -40,12 +45,16 @@ class main:
             elif opcao == "4":
                 self.limpar_terminal()
                 self.remover_imagem()
+            elif opcao == "5":
+                self.limpar_terminal()
+                self.remover_conjunto_imagens()
             elif opcao == "0":
                 print("Saindo...")
                 self.biblioteca.limpa_sistema()
                 sys.exit()
             else:
                 print("Opção inválida")
+            
     
     def cria_imagem(self, url_passada):
         url = url_passada
@@ -115,7 +124,9 @@ class main:
         id = "0"
         while int(id) < 1:
             id = input("Digite o numero da imagem:")
-            if id == "0" or len(id) < 1:
+            if int(id) == 0:
+                self.exibir_menu()
+            if int(id) < 1 or len(id) < 1:
                 print("Opção inválida!")
                 id = "0"
         imagem = None
@@ -128,6 +139,25 @@ class main:
         imagem = copy.deepcopy(self.biblioteca.buscar_imagem_id(int(id)-1))
         self.biblioteca.remover_imagem(imagem)
         self.exibir_menu()
+
+    def remover_conjunto_imagens(self):
+        print("Escolha o conjunto de imagens a ser removido:")
+        print("1. Excluir imagens carregadas pelo usuário")
+        print("2. Excluir imagens criadas a partir da aplicação de filtros")
+        print("3. Excluir todas as imagens")
+        print("0. Voltar ao menu")
+        opcao = input("Digite a opção desejada: ")
+        
+        if opcao == "1":
+            self.biblioteca.remover_imagens_por_tipo("URL")
+        elif opcao == "2":
+            self.biblioteca.remover_imagens_por_tipo("Filtro")
+        elif opcao == "3":
+            self.biblioteca.remover_todas_imagens()
+        elif opcao == "0":
+            self.exibir_menu()
+        else:
+            print("Opção inválida")
 
     def listar_arquivos(self):
         if len(self.biblioteca.lista_imagens) == 0:
