@@ -19,7 +19,6 @@ class Biblioteca:
     def listar_imagens(self):
         for imagem in self.lista_imagens:
             print(str(imagem.id+1) + ' - ' +imagem.nome)
-        print("0 - Voltar ao menu") 
 
     def buscar_imagem(self, nome):
         for imagem in self.lista_imagens:
