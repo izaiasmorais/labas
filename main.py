@@ -102,6 +102,7 @@ class main:
                 self.exibir_menu()
             else:
                 print("Opção inválida")
+                self.aplicar_filtro()
 
             imagem.nome = imagem.nome[:-4] + "_" + type(filtro).__name__+ imagem.extensao
             imagem.imagem = filtro.aplicar_filtro(imagem.imagem)
