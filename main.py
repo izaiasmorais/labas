@@ -19,13 +19,13 @@ class main:
         arquivos = os.listdir(os.getcwd())
         imagens = [arquivo for arquivo in arquivos if arquivo.lower().endswith(('.jpg','.png'))]
         for imagem in imagens:
-            img = Imagem(id = len(self.biblioteca.lista_de_imagens), nome = imagem,caminho = imagem, extensao = os.path.splitext(imagem)[1])
+            img = Imagem(id = len(self.biblioteca.lista_imagens), nome = imagem,caminho = imagem, extensao = os.path.splitext(imagem)[1])
             self.biblioteca.adicionar_imagem(img)
             self.limpar_terminal()
 
     def exibir_menu(self):
         while True:
-            print("\n1. Informar a url da imagem\n2. Aplicar filtro na imagem\n3. Listar os arquivos de imagens\n4. Sair")
+            print("\n1. Informar a url da imagem\n2. Aplicar filtro na imagem\n3. Listar os arquivos de imagens\n4. Remover imagem(s)\n0. Sair")
             opcao = input('Digite a opção desejada: ')
             if opcao == "1":
                 url = input("Digite a url da imagem: ")
@@ -38,7 +38,11 @@ class main:
                 self.limpar_terminal()
                 self.listar_arquivos()
             elif opcao == "4":
+                self.limpar_terminal()
+                self.remover_imagem()
+            elif opcao == "0":
                 print("Saindo...")
+                self.biblioteca.limpa_sistema()
                 sys.exit()
             else:
                 print("Opção inválida")
@@ -53,14 +57,14 @@ class main:
 
         md = Download( url_or_caminho= url, caminho= nome_final)
         resposta = md.baixar_imagem()
-        img = Imagem(id = len(self.biblioteca.lista_de_imagens), nome = nome_final,caminho = nome_final, extensao = extensao)
+        img = Imagem(id = len(self.biblioteca.lista_imagens), nome = nome_final,caminho = nome_final, extensao = extensao)
 
         if resposta is True:
             self.biblioteca.adicionar_imagem(img)
     
     def aplicar_filtro(self):
         self.limpar_terminal()
-        if len(self.biblioteca.lista_de_imagens) == 0:
+        if len(self.biblioteca.lista_imagens) == 0:
             print("Não é possível aplicar filtro!")
             print("Não há imagens na biblioteca.")
             return
@@ -92,17 +96,41 @@ class main:
 
             imagem.nome = imagem.nome[:-4] + "_" + type(filtro).__name__+ imagem.extensao
             imagem.imagem = filtro.aplicar_filtro(imagem.imagem)
-            imagem.id = len(self.biblioteca.lista_de_imagens)
+            imagem.id = len(self.biblioteca.lista_imagens)
                 
             imagem.imagem.save(imagem.nome)
             imagem.mostrar_imagem()
                 
             self.biblioteca.adicionar_imagem(imagem)
         else:
+            print("Opção inválida")    
+
+    def remover_imagem(self):
+        if len(self.biblioteca.lista_imagens) == 0:
+            print("Não é possível remover a imagem!")
+            print("Não há imagens na biblioteca.")
+            return
+        print("Escolha a imagem que deseja remover:")
+        self.biblioteca.listar_imagens()
+        id = "0"
+        while int(id) < 1:
+            id = input("Digite o numero da imagem:")
+            if id == "0" or len(id) < 1:
+                print("Opção inválida!")
+                id = "0"
+        imagem = None
+        for imagem_lib in self.biblioteca.lista_imagens:
+            if imagem_lib.id == int(id)-1:
+                imagem = imagem_lib
+        if imagem == None:
             print("Opção inválida")
+            self.remover_imagem()
+        imagem = copy.deepcopy(self.biblioteca.buscar_imagem_id(int(id)-1))
+        self.biblioteca.remover_imagem(imagem)
+        self.exibir_menu()
 
     def listar_arquivos(self):
-        if len(self.biblioteca.lista_de_imagens) == 0:
+        if len(self.biblioteca.lista_imagens) == 0:
             print("Não foi possível listar as imagens!")
             print("Não há imagens na biblioteca.")
             return
