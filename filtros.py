@@ -12,7 +12,7 @@ class Filtro_escala_cinza:
         return grayscale_image
         
 class Filtro_Cartoon:
-    def aplicar_filtro(self, image):           #Filtro Cartoon(Emboss) que muito parece um relevo
+    def aplicar_filtro(self, image):
         cartooned_image = image.filter(ImageFilter.EMBOSS)
         return cartooned_image
     
