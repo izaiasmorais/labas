@@ -1,6 +1,5 @@
 from PIL import Image
 
-
 class Imagem:
     def __init__(self, id, nome, caminho,extensao):
         self.id = id
@@ -19,4 +18,3 @@ class Imagem:
             self.imagem.show()
         except AttributeError:
             print("Imagem não encontrada ou não pode ser exibida.")
-            

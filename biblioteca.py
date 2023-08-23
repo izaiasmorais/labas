@@ -6,7 +6,6 @@ class Biblioteca:
         aux = self.buscar_imagem(imagem.nome)
         if(aux != None and imagem.nome == aux.nome): 
             return -1 
-       
         self.lista_de_imagens.append(imagem)
 
     def remover_imagem(self, imagem):
